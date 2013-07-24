@@ -4,40 +4,29 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>The little pyqgis query engine by NathanW2</title>
+
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
+    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/NathanW2/little-pyqgis-query-engine">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/NathanW2/little-pyqgis-query-engine/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/NathanW2/little-pyqgis-query-engine/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
-
     <div class="wrapper">
-
+      <header>
+        <h1>The little pyqgis query engine</h1>
+        <p>A basic query engine for pyqgis</p>
+        <p class="view"><a href="https://github.com/NathanW2/little-pyqgis-query-engine">View the Project on GitHub <small>NathanW2/little-pyqgis-query-engine</small></a></p>
+        <ul>
+          <li><a href="https://github.com/NathanW2/little-pyqgis-query-engine/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/NathanW2/little-pyqgis-query-engine/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/NathanW2/little-pyqgis-query-engine">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
       <section>
-        <div id="title">
-          <h1>The little pyqgis query engine</h1>
-          <p>A basic query engine for pyqgis</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/NathanW2">NathanW2</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
-
         <p>A mini query engine for pyqgis to query features from a layer. </p>
 
 <p>It defines a simple SQL style API to create a query</p>
@@ -48,29 +37,58 @@
 
 <p>Results are returned via a generator so results are returned as needed.</p>
 
-<div class="highlight"><pre><span class="n">q</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
-<span class="n">q</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="s">'assessment'</span><span class="p">:</span> <span class="s">u'4309719'</span><span class="p">,</span> 
+<span class="s">'lot'</span><span class="p">:</span> <span class="s">u'LOT 79'</span><span class="p">,</span> 
+<span class="s">'address'</span><span class="p">:</span> <span class="s">u'BIRCHLEY RD'</span>
+<span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="s">'assessment'</span><span class="p">:</span> <span class="s">u'23512'</span><span class="p">,</span> 
+<span class="s">'lot'</span><span class="p">:</span> <span class="s">u'LOT 124'</span><span class="p">,</span> 
+<span class="s">'address'</span><span class="p">:</span> <span class="s">u'BIRCHLEY RD'</span>
+<span class="p">}</span>
 </pre></div>
 
 <p>Normal Python functions can be used in a <code>.select()</code> and <code>.where()</code></p>
 
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">checkassessment</span><span class="p">(</span><span class="n">feature</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">feature</span><span class="p">[</span><span class="s">'assessment'</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">False</span>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">checkassessment</span><span class="p">(</span><span class="n">feature</span><span class="p">):</span>
+<span class="o">...</span>    <span class="k">if</span> <span class="n">feature</span><span class="p">[</span><span class="s">'assessment'</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<span class="o">...</span>        <span class="k">return</span> <span class="bp">False</span>     
+<span class="o">...</span>    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s">'assessment'</span><span class="p">])</span> <span class="o">==</span> <span class="mi">4315968</span>
 
-    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s">'assessment'</span><span class="p">])</span> <span class="o">==</span> <span class="mi">4315968</span>
-
-<span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">query</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s">"postcode = 6164"</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">checkassessment</span><span class="p">)</span>
-                <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">'assessment'</span><span class="p">,</span> 
-                        <span class="s">'address'</span><span class="p">,</span> 
-                        <span class="s">'lot'</span><span class="p">,</span>
-                        <span class="n">geom</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">(),</span>
-                        <span class="n">mylot</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s">'house_numb'</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">query</span><span class="p">(</span><span class="n">layer</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s">"postcode = 6164"</span><span class="p">)</span>
+                     <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">checkassessment</span><span class="p">)</span>
+                     <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">'assessment'</span><span class="p">,</span> 
+                             <span class="s">'address'</span><span class="p">,</span> 
+                             <span class="s">'lot'</span><span class="p">,</span>
+                             <span class="n">geom</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">geometry</span><span class="p">(),</span>
+                             <span class="n">mylot</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s">'house_numb'</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">q</span><span class="p">()</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="s">'geom'</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">qgis</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">QgsGeometry</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x1A8E64B0</span><span class="o">&gt;</span><span class="p">,</span> 
+<span class="s">'assessment'</span><span class="p">:</span> <span class="s">u'4309719'</span><span class="p">,</span> 
+<span class="s">'mylot'</span><span class="p">:</span> <span class="mi">7900</span><span class="p">,</span> 
+<span class="s">'lot'</span><span class="p">:</span> <span class="s">u'LOT 79'</span><span class="p">,</span> 
+<span class="s">'address'</span><span class="p">:</span> <span class="s">u'BIRCHLEY RD'</span>
+<span class="p">}</span>
 </pre></div>
-      </section>
 
+<h3>
+<a name="installing" class="anchor" href="#installing"><span class="octicon octicon-link"></span></a>Installing</h3>
+
+<ul>
+<li>Just download the code from <a href="https://github.com/NathanW2/little-pyqgis-query-engine/zipball/master">here</a>. </li>
+<li>Add the files to your Python project</li>
+<li><code>from query import query</code></li>
+</ul>
+      </section>
     </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/NathanW2">NathanW2</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
   </body>
